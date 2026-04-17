@@ -473,12 +473,23 @@ h3 {
   }
 
   .hero {
+    min-height: auto;
+    padding: 1rem 0 1.4rem;
     border-radius: 24px;
   }
 
   .hero-video,
   .hero__overlay {
     border-radius: 24px;
+  }
+
+  .hero__logo-top {
+    padding: 0.2rem 1rem 0.8rem;
+  }
+
+  .hero__logo-frame {
+    width: min(100%, 360px);
+    padding: 0.85rem 1rem 0.75rem;
   }
 
   .hero__content,
@@ -488,14 +499,44 @@ h3 {
   }
 
   .hero__content {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-  align-items: stretch;
-  padding: 3rem;
-}
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    align-items: start;
+    padding-top: 0.35rem;
+    padding-bottom: 0.6rem;
+  }
+
+  .hero__text {
+    width: 100%;
+    padding: 1.45rem;
+  }
+
+  .hero__text--wide .intro,
+  .hero__text--wide .hero__actions {
+    max-width: none;
+  }
+
+  .hero__actions {
+    justify-content: center;
+    margin-top: 1.35rem;
+  }
+
+  .hero__actions .button {
+    width: 100%;
+  }
+
+  .hero__portrait {
+    min-height: auto;
+    padding: 0.7rem;
+  }
+
+  .hero__portrait img {
+    width: 100%;
+    height: auto;
+    max-height: none;
+    aspect-ratio: auto;
+    object-fit: contain;
+  }
 }
 
 .footer__mail {
@@ -677,3 +718,5 @@ figure figcaption {
   border: 1px solid rgba(214, 148, 97, 0.28);
   box-shadow: 0 12px 28px rgba(214, 148, 97, 0.2);
 }
+
+
