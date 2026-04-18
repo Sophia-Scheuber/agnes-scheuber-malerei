@@ -788,3 +788,31 @@ figure figcaption {
     padding: 1.4rem;
   }
 }
+
+.current-section {
+  margin-top: 1.4rem;
+}
+
+.current-section__sub {
+  margin: 0.7rem 0 0;
+  text-align: center;
+  color: var(--green-deep);
+  font-size: 0.98rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.current-section__grid {
+  margin-top: 1.6rem;
+}
+
+.current-section__grid img {
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+@media (max-width: 720px) {
+  .current-section__sub {
+    font-size: 0.88rem;
+  }
+}
