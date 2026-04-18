@@ -805,6 +805,10 @@ figure figcaption {
 
 .current-section__grid {
   margin-top: 1.6rem;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: center;
 }
 
 .current-section__grid img {
