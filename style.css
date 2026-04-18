@@ -402,6 +402,7 @@ h3 {
   width: 100%;
   height: 245px;
   object-fit: cover;
+  object-position: center center;
   border-radius: 18px;
   background: linear-gradient(180deg, rgba(147, 171, 121, 0.08), rgba(233, 192, 154, 0.08));
 }
@@ -809,6 +810,7 @@ figure figcaption {
 .current-section__grid img {
   aspect-ratio: 4 / 3;
   object-fit: cover;
+  object-position: center center;
 }
 
 @media (max-width: 720px) {
