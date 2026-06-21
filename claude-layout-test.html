@@ -110,8 +110,10 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.7rem;
-    padding: 0.72rem 1rem;
+    gap: 0;
+    width: 46px;
+    height: 46px;
+    padding: 0;
     border: 1px solid rgba(184,151,90,0.28);
     border-radius: 999px;
     background: rgba(250,248,243,0.94);
@@ -204,20 +206,24 @@
     background: rgba(232,217,186,0.24);
   }
 
-  @media (max-width: 768px) {
+    @media (max-width: 768px) {
     #aktuell, #ueber-mich, #lieblingsbild, #entstehung, #kunstwerke, #kontakt { scroll-margin-top: 140px; }
     nav {
       padding: 0.9rem 1rem 0.95rem;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
       gap: 0.85rem;
     }
     .nav-logo {
       height: 62px;
-      max-width: min(74vw, 300px);
+      max-width: min(68vw, 300px);
     }
     .nav-toggle {
-      padding: 0.68rem 0.88rem;
-      font-size: 0.62rem;
-      letter-spacing: 0.14em;
+      width: 42px;
+      height: 42px;
+      padding: 0;
+      flex-shrink: 0;
     }
     .nav-links {
       right: 1rem;
@@ -227,15 +233,58 @@
       font-size: 0.64rem;
       letter-spacing: 0.12em;
       padding: 0.7rem 0.78rem;
+      text-align: center;
+      white-space: normal;
+      line-height: 1.35;
     }
-    .hero { margin-top: 7.3rem; }
+    .hero { margin-top: 6.8rem; }
+    .hero-content { padding: 3.2rem 1.35rem; }
+    .hero-images { height: 46vh; }
+    .container { padding: 0 1.35rem; }
+    .gallery-tabs {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.6rem;
+      border-bottom: none;
+      margin-bottom: 2rem;
+    }
+    .tab-btn {
+      padding: 0.8rem 0.7rem;
+      font-size: 0.56rem;
+      letter-spacing: 0.12em;
+      line-height: 1.35;
+      white-space: normal;
+      text-align: center;
+      border: 1px solid rgba(184,151,90,0.25);
+      border-radius: 999px;
+      background: rgba(250,248,243,0.9);
+    }
+    .tab-btn::after { display: none; }
+    .tab-btn.active, .tab-btn:hover {
+      color: var(--gold);
+      border-color: var(--gold);
+      background: rgba(232,217,186,0.26);
+    }
+    .masonry { columns: 1; }
   }
 
-  @media (max-width: 420px) {
-    .hero { margin-top: 7.6rem; }
+    @media (max-width: 420px) {
+    .hero { margin-top: 6.9rem; }
+    .nav-logo {
+      height: 58px;
+      max-width: min(66vw, 260px);
+    }
+    .nav-toggle {
+      width: 40px;
+      height: 40px;
+    }
     .nav-links a {
       font-size: 0.58rem;
       letter-spacing: 0.1em;
+    }
+    .tab-btn {
+      font-size: 0.52rem;
+      padding: 0.78rem 0.55rem;
     }
   }
 
@@ -749,6 +798,41 @@
   .tab-panel { display: none; }
   .tab-panel.active { display: block; }
 
+  .sketch-subtabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    margin: 0 0 1.8rem;
+  }
+
+  .sketch-subtab-btn {
+    font-family: 'Cinzel', serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--brown);
+    background: rgba(250,248,243,0.9);
+    border: 1px solid rgba(184,151,90,0.25);
+    border-radius: 999px;
+    padding: 0.72rem 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .sketch-subtab-btn.active,
+  .sketch-subtab-btn:hover {
+    color: var(--gold);
+    border-color: var(--gold);
+    background: rgba(232,217,186,0.26);
+  }
+
+  .sketch-subpanel {
+    display: none;
+  }
+
+  .sketch-subpanel.active {
+    display: block;
+  }
   .gallery-subsection-title {
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.1rem;
@@ -809,6 +893,24 @@
     max-height: 90vh;
     object-fit: contain;
     box-shadow: 0 0 80px rgba(0,0,0,0.8);
+  }
+
+  .lightbox-caption {
+    position: absolute;
+    left: 50%;
+    bottom: 2rem;
+    transform: translateX(-50%);
+    color: var(--cream);
+    font-family: 'Cinzel', serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 0.7rem 1rem;
+    background: rgba(27,39,29,0.7);
+    border: 1px solid rgba(232,217,186,0.22);
+    border-radius: 999px;
+    max-width: calc(100vw - 3rem);
   }
 
   .lightbox-close {
@@ -1008,36 +1110,38 @@
     .container { padding: 0 2rem; }
   }
 
-  @media (max-width: 768px) {
-    #aktuell, #ueber-mich, #lieblingsbild, #entstehung, #kunstwerke, #kontakt { scroll-margin-top: 170px; }
+    @media (max-width: 768px) {
+    #aktuell, #ueber-mich, #lieblingsbild, #entstehung, #kunstwerke, #kontakt { scroll-margin-top: 140px; }
     nav {
       padding: 0.9rem 1rem 0.95rem;
-      flex-direction: column;
+      flex-direction: row;
       align-items: center;
-      gap: 0.75rem;
+      justify-content: space-between;
+      gap: 0.85rem;
     }
     .nav-logo {
       height: 62px;
-      max-width: min(78vw, 320px);
+      max-width: min(68vw, 300px);
+    }
+    .nav-toggle {
+      width: 42px;
+      height: 42px;
+      padding: 0;
+      flex-shrink: 0;
     }
     .nav-links {
-      width: 100%;
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 0.45rem 0.7rem;
-      justify-content: stretch;
+      right: 1rem;
+      width: min(320px, calc(100vw - 2rem));
     }
-    .nav-links li { min-width: 0; }
     .nav-links a {
-      display: block;
-      text-align: center;
       font-size: 0.64rem;
       letter-spacing: 0.12em;
-      padding: 0.45rem 0.4rem;
+      padding: 0.7rem 0.78rem;
+      text-align: center;
       white-space: normal;
       line-height: 1.35;
     }
-    .hero { margin-top: 8.8rem; }
+    .hero { margin-top: 6.8rem; }
     .hero-content { padding: 3.2rem 1.35rem; }
     .hero-images { height: 46vh; }
     .container { padding: 0 1.35rem; }
@@ -1068,8 +1172,16 @@
     .masonry { columns: 1; }
   }
 
-  @media (max-width: 420px) {
-    .hero { margin-top: 9.4rem; }
+    @media (max-width: 420px) {
+    .hero { margin-top: 6.9rem; }
+    .nav-logo {
+      height: 58px;
+      max-width: min(66vw, 260px);
+    }
+    .nav-toggle {
+      width: 40px;
+      height: 40px;
+    }
     .nav-links a {
       font-size: 0.58rem;
       letter-spacing: 0.1em;
@@ -1128,7 +1240,7 @@
       <span class="section-label">Aktuell</span>
       <h2 class="section-title">Urban Sketchers<br>Regensburg</h2>
       <p class="aktuell-subtitle">Zeichnen · Entdecken · Teilen</p>
-      <a href="#kunstwerke" class="aktuell-more" data-open-tab="reisen">Mehr</a>
+      <a href="#kunstwerke" class="aktuell-more" data-open-tab="reisen" data-open-sketch-tab="urban">Mehr</a>
     </div>
     <div class="aktuell-images">
       <div class="img-wrap">
@@ -1238,25 +1350,158 @@
     <div class="tab-panel" id="tab-zeichnungen">
       <p style="font-style:italic;color:var(--brown);font-size:1rem;max-width:none;width:100%;margin-bottom:2.5rem;font-weight:300;">In meinen Zeichnungen beobachte ich Formen, Natur, Menschen und Stimmungen.</p>
       <div class="gallery-subsection-title">Skizzen und Studien in Schwarz-Weiß</div>
-      <div class="masonry"></div>
+      <div class="masonry">
+      <div class="masonry-item"><img src="Zeichnungen/IMG_4563.jpeg" alt="Zeichnung 1" data-title="Zeichnung 1" title="Zeichnung 1"></div>
+      <div class="masonry-item"><img src="Zeichnungen/IMG_5153.jpeg" alt="Zeichnung 2" data-title="Zeichnung 2" title="Zeichnung 2"></div>
+      <div class="masonry-item"><img src="Zeichnungen/IMG_5203.jpeg" alt="Zeichnung 3" data-title="Zeichnung 3" title="Zeichnung 3"></div>
+      <div class="masonry-item"><img src="Zeichnungen/IMG_5366.jpeg" alt="Zeichnung 4" data-title="Zeichnung 4" title="Zeichnung 4"></div>
+      <div class="masonry-item"><img src="Zeichnungen/IMG_5530.jpeg" alt="Zeichnung 5" data-title="Zeichnung 5" title="Zeichnung 5"></div>
+      <div class="masonry-item"><img src="Zeichnungen/IMG_5678.jpeg" alt="Zeichnung 6" data-title="Zeichnung 6" title="Zeichnung 6"></div>
+      <div class="masonry-item"><img src="Zeichnungen/IMG_5806.jpeg" alt="Zeichnung 7" data-title="Zeichnung 7" title="Zeichnung 7"></div>
+      <div class="masonry-item"><img src="Zeichnungen/IMG_6241.jpeg" alt="Zeichnung 8" data-title="Zeichnung 8" title="Zeichnung 8"></div>
+      <div class="masonry-item"><img src="Zeichnungen/IMG_7680.jpeg" alt="Zeichnung 9" data-title="Zeichnung 9" title="Zeichnung 9"></div>
+    </div>
     </div>
 
     <!-- NATUR & GARTEN -->
     <div class="tab-panel active" id="tab-natur">
       <p style="font-style:italic;color:var(--brown);font-size:1rem;max-width:55ch;margin-bottom:2.5rem;font-weight:300;">Meine Ölgemälde tragen Ruhe, Tiefe und natürliche Farbklänge in sich.</p>
-      <div class="masonry masonry-3"></div>
+      <div class="masonry masonry-3">
+      <div class="masonry-item"><img src="Ölgemälde/IMG_1769.jpeg" alt="Ölgemälde 1" data-title="Ölgemälde 1" title="Ölgemälde 1"></div>
+      <div class="masonry-item"><img src="Ölgemälde/IMG_3368.jpeg" alt="Ölgemälde 2" data-title="Ölgemälde 2" title="Ölgemälde 2"></div>
+      <div class="masonry-item"><img src="Ölgemälde/IMG_3709.jpeg" alt="Ölgemälde 3" data-title="Ölgemälde 3" title="Ölgemälde 3"></div>
+      <div class="masonry-item"><img src="Ölgemälde/IMG_3881.jpeg" alt="Ölgemälde 4" data-title="Ölgemälde 4" title="Ölgemälde 4"></div>
+      <div class="masonry-item"><img src="Ölgemälde/IMG_6016.jpeg" alt="Ölgemälde 5" data-title="Ölgemälde 5" title="Ölgemälde 5"></div>
+      <div class="masonry-item"><img src="Ölgemälde/IMG_6143.jpeg" alt="Ölgemälde 6" data-title="Ölgemälde 6" title="Ölgemälde 6"></div>
+      <div class="masonry-item"><img src="Ölgemälde/IMG_6257.jpeg" alt="Ölgemälde 7" data-title="Ölgemälde 7" title="Ölgemälde 7"></div>
+      <div class="masonry-item"><img src="Ölgemälde/IMG_6439.jpeg" alt="Ölgemälde 8" data-title="Ölgemälde 8" title="Ölgemälde 8"></div>
+      <div class="masonry-item"><img src="Ölgemälde/IMG_6882.jpeg" alt="Ölgemälde 9" data-title="Ölgemälde 9" title="Ölgemälde 9"></div>
+      <div class="masonry-item"><img src="Ölgemälde/IMG_7468.jpeg" alt="Ölgemälde 10" data-title="Ölgemälde 10" title="Ölgemälde 10"></div>
+      <div class="masonry-item"><img src="Ölgemälde/IMG_7502.jpeg" alt="Ölgemälde 11" data-title="Ölgemälde 11" title="Ölgemälde 11"></div>
+      <div class="masonry-item"><img src="Ölgemälde/IMG_8084.jpeg" alt="Ölgemälde 12" data-title="Ölgemälde 12" title="Ölgemälde 12"></div>
+    </div>
     </div>
 
     <!-- REISEN & ORTE -->
     <div class="tab-panel" id="tab-reisen">
       <p style="font-style:italic;color:var(--brown);font-size:1rem;max-width:55ch;margin-bottom:2.5rem;font-weight:300;">Im Sketching halte ich Eindrücke, Bewegungen und besondere Momente spontan fest.</p>
-      <div class="masonry masonry-3"></div>
+      <div class="sketch-subtabs">
+        <button class="sketch-subtab-btn active" data-sketch-tab="classic">Sketching</button>
+        <button class="sketch-subtab-btn" data-sketch-tab="urban">Urban Sketching</button>
+      </div>
+      <div class="sketch-subpanel active" id="sketch-classic">
+        <div class="masonry masonry-3">
+          <div class="masonry-item"><img src="Sketching/IMG_2609.jpeg" alt="Sketching 1" data-title="Sketching 1" title="Sketching 1"></div>
+          <div class="masonry-item"><img src="Sketching/IMG_2711.jpeg" alt="Sketching 2" data-title="Sketching 2" title="Sketching 2"></div>
+          <div class="masonry-item"><img src="Sketching/IMG_2712.jpeg" alt="Sketching 3" data-title="Sketching 3" title="Sketching 3"></div>
+          <div class="masonry-item"><img src="Sketching/IMG_2719.jpeg" alt="Sketching 4" data-title="Sketching 4" title="Sketching 4"></div>
+          <div class="masonry-item"><img src="Sketching/IMG_2720.jpeg" alt="Sketching 5" data-title="Sketching 5" title="Sketching 5"></div>
+          <div class="masonry-item"><img src="Sketching/IMG_3133.jpeg" alt="Sketching 6" data-title="Sketching 6" title="Sketching 6"></div>
+          <div class="masonry-item"><img src="Sketching/IMG_3530.jpeg" alt="Sketching 7" data-title="Sketching 7" title="Sketching 7"></div>
+          <div class="masonry-item"><img src="Sketching/IMG_3682.jpeg" alt="Sketching 8" data-title="Sketching 8" title="Sketching 8"></div>
+          <div class="masonry-item"><img src="Sketching/IMG_3826.jpeg" alt="Sketching 9" data-title="Sketching 9" title="Sketching 9"></div>
+          <div class="masonry-item"><img src="Sketching/IMG_3828.jpeg" alt="Sketching 10" data-title="Sketching 10" title="Sketching 10"></div>
+          <div class="masonry-item"><img src="Sketching/IMG_3829.jpeg" alt="Sketching 11" data-title="Sketching 11" title="Sketching 11"></div>
+          <div class="masonry-item"><img src="Sketching/IMG_3883.jpeg" alt="Sketching 12" data-title="Sketching 12" title="Sketching 12"></div>
+          <div class="masonry-item"><img src="Sketching/IMG_3916.jpeg" alt="Sketching 13" data-title="Sketching 13" title="Sketching 13"></div>
+          <div class="masonry-item"><img src="Sketching/IMG_3918.jpeg" alt="Sketching 14" data-title="Sketching 14" title="Sketching 14"></div>
+          <div class="masonry-item"><img src="Sketching/IMG_3919.jpeg" alt="Sketching 15" data-title="Sketching 15" title="Sketching 15"></div>
+          <div class="masonry-item"><img src="Sketching/IMG_4543.jpeg" alt="Sketching 16" data-title="Sketching 16" title="Sketching 16"></div>
+          <div class="masonry-item"><img src="Sketching/IMG_4544.jpeg" alt="Sketching 17" data-title="Sketching 17" title="Sketching 17"></div>
+          <div class="masonry-item"><img src="Sketching/IMG_4565.jpeg" alt="Sketching 18" data-title="Sketching 18" title="Sketching 18"></div>
+          <div class="masonry-item"><img src="Sketching/IMG_4864.jpeg" alt="Sketching 19" data-title="Sketching 19" title="Sketching 19"></div>
+          <div class="masonry-item"><img src="Sketching/IMG_4865.jpeg" alt="Sketching 20" data-title="Sketching 20" title="Sketching 20"></div>
+          <div class="masonry-item"><img src="Sketching/IMG_4866.jpeg" alt="Sketching 21" data-title="Sketching 21" title="Sketching 21"></div>
+          <div class="masonry-item"><img src="Sketching/IMG_4869.jpeg" alt="Sketching 22" data-title="Sketching 22" title="Sketching 22"></div>
+          <div class="masonry-item"><img src="Sketching/IMG_5134.jpeg" alt="Sketching 23" data-title="Sketching 23" title="Sketching 23"></div>
+          <div class="masonry-item"><img src="Sketching/IMG_5135.jpeg" alt="Sketching 24" data-title="Sketching 24" title="Sketching 24"></div>
+          <div class="masonry-item"><img src="Sketching/IMG_5334.jpeg" alt="Sketching 25" data-title="Sketching 25" title="Sketching 25"></div>
+          <div class="masonry-item"><img src="Sketching/IMG_5335.jpeg" alt="Sketching 26" data-title="Sketching 26" title="Sketching 26"></div>
+          <div class="masonry-item"><img src="Sketching/IMG_5655.jpeg" alt="Sketching 27" data-title="Sketching 27" title="Sketching 27"></div>
+          <div class="masonry-item"><img src="Sketching/IMG_5684.jpeg" alt="Sketching 28" data-title="Sketching 28" title="Sketching 28"></div>
+          <div class="masonry-item"><img src="Sketching/IMG_6349.jpeg" alt="Sketching 29" data-title="Sketching 29" title="Sketching 29"></div>
+          <div class="masonry-item"><img src="Sketching/IMG_6382.jpeg" alt="Sketching 30" data-title="Sketching 30" title="Sketching 30"></div>
+          <div class="masonry-item"><img src="Sketching/IMG_6513.jpeg" alt="Sketching 31" data-title="Sketching 31" title="Sketching 31"></div>
+          <div class="masonry-item"><img src="Sketching/IMG_6514.jpeg" alt="Sketching 32" data-title="Sketching 32" title="Sketching 32"></div>
+          <div class="masonry-item"><img src="Sketching/IMG_6517.jpeg" alt="Sketching 33" data-title="Sketching 33" title="Sketching 33"></div>
+          <div class="masonry-item"><img src="Sketching/IMG_6521.jpeg" alt="Sketching 34" data-title="Sketching 34" title="Sketching 34"></div>
+          <div class="masonry-item"><img src="Sketching/IMG_6522.jpeg" alt="Sketching 35" data-title="Sketching 35" title="Sketching 35"></div>
+          <div class="masonry-item"><img src="Sketching/IMG_6525.jpeg" alt="Sketching 36" data-title="Sketching 36" title="Sketching 36"></div>
+          <div class="masonry-item"><img src="Sketching/IMG_6526.jpeg" alt="Sketching 37" data-title="Sketching 37" title="Sketching 37"></div>
+          <div class="masonry-item"><img src="Sketching/IMG_6822.jpeg" alt="Sketching 38" data-title="Sketching 38" title="Sketching 38"></div>
+          <div class="masonry-item"><img src="Sketching/IMG_6823.jpeg" alt="Sketching 39" data-title="Sketching 39" title="Sketching 39"></div>
+          <div class="masonry-item"><img src="Sketching/IMG_7069.jpeg" alt="Sketching 40" data-title="Sketching 40" title="Sketching 40"></div>
+          <div class="masonry-item"><img src="Sketching/IMG_7128.jpeg" alt="Sketching 41" data-title="Sketching 41" title="Sketching 41"></div>
+        </div>
+      </div>
+      <div class="sketch-subpanel" id="sketch-urban">
+        <div class="gallery-subsection-title">Urban Sketching</div>
+        <div class="masonry masonry-3">
+          <div class="masonry-item"><img src="Sketching/Urban Sketching/IMG_2713.jpeg" alt="Urban Sketching 1" data-title="Urban Sketching 1" title="Urban Sketching 1"></div>
+          <div class="masonry-item"><img src="Sketching/Urban Sketching/IMG_2716.jpeg" alt="Urban Sketching 2" data-title="Urban Sketching 2" title="Urban Sketching 2"></div>
+          <div class="masonry-item"><img src="Sketching/Urban Sketching/IMG_3945.jpeg" alt="Urban Sketching 3" data-title="Urban Sketching 3" title="Urban Sketching 3"></div>
+          <div class="masonry-item"><img src="Sketching/Urban Sketching/IMG_4883.jpeg" alt="Urban Sketching 4" data-title="Urban Sketching 4" title="Urban Sketching 4"></div>
+          <div class="masonry-item"><img src="Sketching/Urban Sketching/IMG_4885.jpeg" alt="Urban Sketching 5" data-title="Urban Sketching 5" title="Urban Sketching 5"></div>
+          <div class="masonry-item"><img src="Sketching/Urban Sketching/IMG_5004.jpeg" alt="Urban Sketching 6" data-title="Urban Sketching 6" title="Urban Sketching 6"></div>
+          <div class="masonry-item"><img src="Sketching/Urban Sketching/IMG_5005.jpeg" alt="Urban Sketching 7" data-title="Urban Sketching 7" title="Urban Sketching 7"></div>
+          <div class="masonry-item"><img src="Sketching/Urban Sketching/IMG_5007.jpeg" alt="Urban Sketching 8" data-title="Urban Sketching 8" title="Urban Sketching 8"></div>
+          <div class="masonry-item"><img src="Sketching/Urban Sketching/IMG_5333.jpeg" alt="Urban Sketching 9" data-title="Urban Sketching 9" title="Urban Sketching 9"></div>
+          <div class="masonry-item"><img src="Sketching/Urban Sketching/IMG_5803.jpeg" alt="Urban Sketching 10" data-title="Urban Sketching 10" title="Urban Sketching 10"></div>
+          <div class="masonry-item"><img src="Sketching/Urban Sketching/IMG_5822.jpeg" alt="Urban Sketching 11" data-title="Urban Sketching 11" title="Urban Sketching 11"></div>
+          <div class="masonry-item"><img src="Sketching/Urban Sketching/IMG_5914.jpeg" alt="Urban Sketching 12" data-title="Urban Sketching 12" title="Urban Sketching 12"></div>
+          <div class="masonry-item"><img src="Sketching/Urban Sketching/IMG_5915.jpeg" alt="Urban Sketching 13" data-title="Urban Sketching 13" title="Urban Sketching 13"></div>
+          <div class="masonry-item"><img src="Sketching/Urban Sketching/IMG_6240.jpeg" alt="Urban Sketching 14" data-title="Urban Sketching 14" title="Urban Sketching 14"></div>
+          <div class="masonry-item"><img src="Sketching/Urban Sketching/IMG_6360.jpeg" alt="Urban Sketching 15" data-title="Urban Sketching 15" title="Urban Sketching 15"></div>
+          <div class="masonry-item"><img src="Sketching/Urban Sketching/IMG_6381.jpeg" alt="Urban Sketching 16" data-title="Urban Sketching 16" title="Urban Sketching 16"></div>
+          <div class="masonry-item"><img src="Sketching/Urban Sketching/IMG_6508.jpeg" alt="Urban Sketching 17" data-title="Urban Sketching 17" title="Urban Sketching 17"></div>
+          <div class="masonry-item"><img src="Sketching/Urban Sketching/IMG_6512.jpeg" alt="Urban Sketching 18" data-title="Urban Sketching 18" title="Urban Sketching 18"></div>
+          <div class="masonry-item"><img src="Sketching/Urban Sketching/IMG_6726.jpeg" alt="Urban Sketching 19" data-title="Urban Sketching 19" title="Urban Sketching 19"></div>
+          <div class="masonry-item"><img src="Sketching/Urban Sketching/IMG_6820.jpeg" alt="Urban Sketching 20" data-title="Urban Sketching 20" title="Urban Sketching 20"></div>
+          <div class="masonry-item"><img src="Sketching/Urban Sketching/IMG_6821.jpeg" alt="Urban Sketching 21" data-title="Urban Sketching 21" title="Urban Sketching 21"></div>
+          <div class="masonry-item"><img src="Sketching/Urban Sketching/IMG_7126.jpeg" alt="Urban Sketching 22" data-title="Urban Sketching 22" title="Urban Sketching 22"></div>
+          <div class="masonry-item"><img src="Sketching/Urban Sketching/IMG_7283.jpeg" alt="Urban Sketching 23" data-title="Urban Sketching 23" title="Urban Sketching 23"></div>
+          <div class="masonry-item"><img src="Sketching/Urban Sketching/IMG_7289.jpeg" alt="Urban Sketching 24" data-title="Urban Sketching 24" title="Urban Sketching 24"></div>
+          <div class="masonry-item"><img src="Sketching/Urban Sketching/IMG_7292.jpeg" alt="Urban Sketching 25" data-title="Urban Sketching 25" title="Urban Sketching 25"></div>
+        </div>
+      </div>
     </div>
 
     <!-- TRAUMWELTEN -->
     <div class="tab-panel" id="tab-traum">
       <p style="font-style:italic;color:var(--brown);font-size:1rem;max-width:55ch;margin-bottom:2.5rem;font-weight:300;">In Acryl und Aquarell darf Farbe frei fließen und neue Stimmungen entstehen lassen.</p>
-      <div class="masonry masonry-3"></div>
+      <div class="masonry masonry-3">
+      <div class="masonry-item"><img src="Acryl & Aquarell/IMG_2098.jpeg" alt="Acryl & Aquarell 1" data-title="Acryl & Aquarell 1" title="Acryl & Aquarell 1"></div>
+      <div class="masonry-item"><img src="Acryl & Aquarell/IMG_2368.jpeg" alt="Acryl & Aquarell 2" data-title="Acryl & Aquarell 2" title="Acryl & Aquarell 2"></div>
+      <div class="masonry-item"><img src="Acryl & Aquarell/IMG_2515.jpeg" alt="Acryl & Aquarell 3" data-title="Acryl & Aquarell 3" title="Acryl & Aquarell 3"></div>
+      <div class="masonry-item"><img src="Acryl & Aquarell/IMG_2560.jpeg" alt="Acryl & Aquarell 4" data-title="Acryl & Aquarell 4" title="Acryl & Aquarell 4"></div>
+      <div class="masonry-item"><img src="Acryl & Aquarell/IMG_2562.jpeg" alt="Acryl & Aquarell 5" data-title="Acryl & Aquarell 5" title="Acryl & Aquarell 5"></div>
+      <div class="masonry-item"><img src="Acryl & Aquarell/IMG_2563.jpeg" alt="Acryl & Aquarell 6" data-title="Acryl & Aquarell 6" title="Acryl & Aquarell 6"></div>
+      <div class="masonry-item"><img src="Acryl & Aquarell/IMG_2890.jpeg" alt="Acryl & Aquarell 7" data-title="Acryl & Aquarell 7" title="Acryl & Aquarell 7"></div>
+      <div class="masonry-item"><img src="Acryl & Aquarell/IMG_3073.jpeg" alt="Acryl & Aquarell 8" data-title="Acryl & Aquarell 8" title="Acryl & Aquarell 8"></div>
+      <div class="masonry-item"><img src="Acryl & Aquarell/IMG_3368.jpeg" alt="Acryl & Aquarell 9" data-title="Acryl & Aquarell 9" title="Acryl & Aquarell 9"></div>
+      <div class="masonry-item"><img src="Acryl & Aquarell/IMG_3451.jpeg" alt="Acryl & Aquarell 10" data-title="Acryl & Aquarell 10" title="Acryl & Aquarell 10"></div>
+      <div class="masonry-item"><img src="Acryl & Aquarell/IMG_3588.jpeg" alt="Acryl & Aquarell 11" data-title="Acryl & Aquarell 11" title="Acryl & Aquarell 11"></div>
+      <div class="masonry-item"><img src="Acryl & Aquarell/IMG_4536.jpeg" alt="Acryl & Aquarell 12" data-title="Acryl & Aquarell 12" title="Acryl & Aquarell 12"></div>
+      <div class="masonry-item"><img src="Acryl & Aquarell/IMG_4541.jpeg" alt="Acryl & Aquarell 13" data-title="Acryl & Aquarell 13" title="Acryl & Aquarell 13"></div>
+      <div class="masonry-item"><img src="Acryl & Aquarell/IMG_4542.jpeg" alt="Acryl & Aquarell 14" data-title="Acryl & Aquarell 14" title="Acryl & Aquarell 14"></div>
+      <div class="masonry-item"><img src="Acryl & Aquarell/IMG_4583.jpeg" alt="Acryl & Aquarell 15" data-title="Acryl & Aquarell 15" title="Acryl & Aquarell 15"></div>
+      <div class="masonry-item"><img src="Acryl & Aquarell/IMG_5677.jpeg" alt="Acryl & Aquarell 16" data-title="Acryl & Aquarell 16" title="Acryl & Aquarell 16"></div>
+      <div class="masonry-item"><img src="Acryl & Aquarell/IMG_5679.jpeg" alt="Acryl & Aquarell 17" data-title="Acryl & Aquarell 17" title="Acryl & Aquarell 17"></div>
+      <div class="masonry-item"><img src="Acryl & Aquarell/IMG_5927.jpeg" alt="Acryl & Aquarell 18" data-title="Acryl & Aquarell 18" title="Acryl & Aquarell 18"></div>
+      <div class="masonry-item"><img src="Acryl & Aquarell/IMG_5928.jpeg" alt="Acryl & Aquarell 19" data-title="Acryl & Aquarell 19" title="Acryl & Aquarell 19"></div>
+      <div class="masonry-item"><img src="Acryl & Aquarell/IMG_6173.jpeg" alt="Acryl & Aquarell 20" data-title="Acryl & Aquarell 20" title="Acryl & Aquarell 20"></div>
+      <div class="masonry-item"><img src="Acryl & Aquarell/IMG_6216.jpeg" alt="Acryl & Aquarell 21" data-title="Acryl & Aquarell 21" title="Acryl & Aquarell 21"></div>
+      <div class="masonry-item"><img src="Acryl & Aquarell/IMG_6316.jpeg" alt="Acryl & Aquarell 22" data-title="Acryl & Aquarell 22" title="Acryl & Aquarell 22"></div>
+      <div class="masonry-item"><img src="Acryl & Aquarell/IMG_6334.jpeg" alt="Acryl & Aquarell 23" data-title="Acryl & Aquarell 23" title="Acryl & Aquarell 23"></div>
+      <div class="masonry-item"><img src="Acryl & Aquarell/IMG_6611.jpeg" alt="Acryl & Aquarell 24" data-title="Acryl & Aquarell 24" title="Acryl & Aquarell 24"></div>
+      <div class="masonry-item"><img src="Acryl & Aquarell/IMG_6626.jpeg" alt="Acryl & Aquarell 25" data-title="Acryl & Aquarell 25" title="Acryl & Aquarell 25"></div>
+      <div class="masonry-item"><img src="Acryl & Aquarell/IMG_6789.jpeg" alt="Acryl & Aquarell 26" data-title="Acryl & Aquarell 26" title="Acryl & Aquarell 26"></div>
+      <div class="masonry-item"><img src="Acryl & Aquarell/IMG_6790.jpeg" alt="Acryl & Aquarell 27" data-title="Acryl & Aquarell 27" title="Acryl & Aquarell 27"></div>
+      <div class="masonry-item"><img src="Acryl & Aquarell/IMG_7663.jpeg" alt="Acryl & Aquarell 28" data-title="Acryl & Aquarell 28" title="Acryl & Aquarell 28"></div>
+      <div class="masonry-item"><img src="Acryl & Aquarell/IMG_7929.jpeg" alt="Acryl & Aquarell 29" data-title="Acryl & Aquarell 29" title="Acryl & Aquarell 29"></div>
+      <div class="masonry-item"><img src="Acryl & Aquarell/IMG_7948.jpeg" alt="Acryl & Aquarell 30" data-title="Acryl & Aquarell 30" title="Acryl & Aquarell 30"></div>
+      <div class="masonry-item"><img src="Acryl & Aquarell/IMG_9549.jpeg" alt="Acryl & Aquarell 31" data-title="Acryl & Aquarell 31" title="Acryl & Aquarell 31"></div>
+    </div>
     </div>
   </div>
 </section>
@@ -1287,6 +1532,7 @@
 <div class="lightbox" id="lightbox">
   <button class="lightbox-close" id="lightbox-close">Schließen ✕</button>
   <img src="" alt="" id="lightbox-img">
+  <div class="lightbox-caption" id="lightbox-caption"></div>
 </div>
 
 <script>
@@ -1305,12 +1551,28 @@
     btn.addEventListener('click', () => activateTab(btn.dataset.tab));
   });
 
+  function activateSketchSubtab(tabName) {
+    const targetButton = document.querySelector('.sketch-subtab-btn[data-sketch-tab="' + tabName + '"]');
+    const targetPanel = document.getElementById('sketch-' + tabName);
+    if (!targetButton || !targetPanel) return;
+    document.querySelectorAll('.sketch-subtab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.sketch-subpanel').forEach(p => p.classList.remove('active'));
+    targetButton.classList.add('active');
+    targetPanel.classList.add('active');
+  }
+
+  document.querySelectorAll('.sketch-subtab-btn').forEach(btn => {
+    btn.addEventListener('click', () => activateSketchSubtab(btn.dataset.sketchTab));
+  });
+
   document.querySelectorAll('[data-open-tab]').forEach(link => {
     link.addEventListener('click', () => {
       activateTab(link.dataset.openTab);
+      if (link.dataset.openSketchTab) {
+        activateSketchSubtab(link.dataset.openSketchTab);
+      }
     });
   });
-
   // Lightbox
   const lb = document.getElementById('lightbox');
   const lbImg = document.getElementById('lightbox-img');
@@ -1320,6 +1582,7 @@
     img.addEventListener('click', () => {
       lbImg.src = img.src;
       lbImg.alt = img.alt;
+      lbCaption.textContent = img.dataset.title || img.alt || '';
       lb.classList.add('open');
     });
   });
@@ -1386,6 +1649,13 @@
 </script>
 </body>
 </html>
+
+
+
+
+
+
+
 
 
 
